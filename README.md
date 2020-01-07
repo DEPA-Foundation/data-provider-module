@@ -1,13 +1,13 @@
 The data provider module is perhaps the most crucial piece of software in the DEPA ecosystem. The reason for this is that in order to be consumers of DEPA data, companies also need to be providers of data. Therefore, nothing can accelerate the adoption of the DEPA framework faster than a data provider module which makes it as easy as possible for companies to plug in and begin sharing their data.
 
 A well designed data provider module (DPM) will help with the following tasks:
-- Connecting with a legacy data store (most banks and financial institutions use Oracle or some other RDBMS)
+- Connecting with a legacy data store (most banks offer access to their Oracle/Finacle/RDBMS systems via some API gateway)
 - Authenticating that incoming consent requests are coming from valid Account Aggregators (AAs)
 - Verifying the authenticity of digital signatures coming from the AAs
 - Logging and storage of electronic consent artefacts
 - Allowing for discovery and linking of user accounts
 - Efficiently interpreting and executing data filtering as per the consent request
-- Encoding data as per the defined schema
+- Formatting outgoing data as per the defined schema
 - Correctly encrypting outgoing data
 - Maximizing the speed and scalability of all APIs
 - Optimizing reliability, redundancy, and uptime
