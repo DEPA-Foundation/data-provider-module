@@ -16,13 +16,12 @@ A well designed data provider module (DPM) will help with the following tasks:
 
 The ideal scenario is that we produce a scaleable and clean piece of software which companies can easily customize and deploy as per their requirements. 
 
-The open API specifications for the DEPA system can be found here - https://api.rebit.org.in/
+[The open API specifications for the DEPA system can be found here](https://api.rebit.org.in/)
 
-The standardized document schemas for financial data documents can be found here - https://api.rebit.org.in/schema
+[The standardized document schemas for financial data documents can be found here](https://api.rebit.org.in/schema)
 
-A corporate sandbox simulating a DPM (at an abstracted level) can be found here - https://finvu.github.io/sandbox/fip_simulator/ 
+[A corporate sandbox simulating a DPM (at an abstracted level) can be found here](https://finvu.github.io/sandbox/fip_simulator/)
 
-Another corporate sandbox detailing some APIs and process flows can be found here - https://www.onemoney.in/docs/api/ui_flows/
+[Another corporate sandbox detailing some APIs and process flows can be found here](https://www.onemoney.in/docs/api/ui_flows/)
 
-
-An overview of the cryptography workflows for DEPA can be found here - https://pdfhost.io/v/PIAeIEG0_NBFCAA__Security_Overview_1_1_1pdf.pdf
+[An overview of the cryptography workflows for DEPA can be found here](https://pdfhost.io/v/PIAeIEG0_NBFCAA__Security_Overview_1_1_1pdf.pdf)
