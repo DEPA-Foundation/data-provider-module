@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.UUID;
 
 /*
@@ -18,24 +19,31 @@ import java.util.UUID;
 @Getter
 public class Account {
 
-    private String id;
-    private String accountAggregatorId;
+    private UUID id;
+    // @todo: Definition of linkRefNumber
+    private String linkRefNumber;
+
+    private String aaId;
+    private String customerAAId;
+
+    // @todo: which accountNumber is this?
+    private String accountNumber;
+
+    // @todo: which accountRefNumber is this?
+    private String accountRefNumber;
     private AccountStatus status;
-    private AccountCategory category;
-    private String name;
-    private String userId;
+    private AccountType type;
+    private Date createdAt;
+    private Date updatedAt;
 
-    public Account(String accountAggregatorId, AccountCategory category, String name, String userId) {
-        this.id = createId();
+    public Account(String linkRefNumber, String aaId, String customerAAId, String accountNumber, String accountRefNumber, AccountType type) {
+        this.linkRefNumber = linkRefNumber;
+        this.aaId = aaId;
+        this.customerAAId = customerAAId;
+        this.accountNumber = accountNumber;
+        this.accountRefNumber = accountRefNumber;
+        this.type = type;
+
         this.status = AccountStatus.INITIATED;
-
-        this.accountAggregatorId = accountAggregatorId;
-        this.category = category;
-        this.name = name;
-        this.userId = userId;
-    }
-
-    private String createId() {
-        return UUID.randomUUID().toString();
     }
 }

@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.2.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id 'org.flywaydb.flyway' version '6.2.3'
+	id 'nu.studer.jooq' version '4.0'
 }
 
 group = 'org.indiastack'
@@ -12,10 +14,51 @@ repositories {
 	mavenCentral()
 }
 
+jooq {
+	version = '3.12.3'
+	edition = 'OSS'
+
+	primary(sourceSets.main) {
+		jdbc {
+			driver = 'org.postgresql.Driver'
+			url = 'jdbc:postgresql://localhost:5432/depa'
+			user = 'depa'
+			password = 'depa'
+		}
+
+		generator {
+			name = 'org.jooq.codegen.DefaultGenerator'
+
+			strategy {
+				name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+			}
+
+			database {
+				name = 'org.jooq.meta.postgres.PostgresDatabase'
+				inputSchema = 'depa'
+			}
+
+			generate {
+				relations = true
+				deprecated = false
+				records = true
+				immutablePojos = false
+				fluentSetters = true
+			}
+
+			target {
+				packageName = "org.indiastack.depa.generated.jooq"
+				directory = "build/generated/jooq"
+			}
+		}
+	}
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springdoc:springdoc-openapi-core:1.1.49'
-	implementation 'org.springdoc:springdoc-openapi-ui:1.1.49'
+	implementation 'org.postgresql:postgresql'
+	implementation 'org.jooq:jooq'
 
 	compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
@@ -26,6 +69,8 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+
+	jooqRuntime 'org.postgresql:postgresql'
 }
 
 test {
