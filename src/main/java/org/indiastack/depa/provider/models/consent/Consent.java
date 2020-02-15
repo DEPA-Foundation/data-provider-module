@@ -1,4 +1,4 @@
-package org.indiastack.depa.provider.gateway.models.consent;
+package org.indiastack.depa.provider.models.consent;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

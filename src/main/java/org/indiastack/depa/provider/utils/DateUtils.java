@@ -1,4 +1,4 @@
-package org.indiastack.depa.provider.gateway.utils;
+package org.indiastack.depa.provider.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

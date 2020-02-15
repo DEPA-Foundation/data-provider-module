@@ -1,4 +1,4 @@
-package org.indiastack.depa.provider.gateway.models.account.http;
+package org.indiastack.depa.provider.models.account.http;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

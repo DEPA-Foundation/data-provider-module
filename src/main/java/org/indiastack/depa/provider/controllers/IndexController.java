@@ -1,4 +1,4 @@
-package org.indiastack.depa.provider.gateway.controllers;
+package org.indiastack.depa.provider.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

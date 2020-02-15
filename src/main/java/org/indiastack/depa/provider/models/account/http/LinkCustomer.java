@@ -1,4 +1,4 @@
-package org.indiastack.depa.provider.gateway.models.account.http;
+package org.indiastack.depa.provider.models.account.http;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class Customer {
+public class LinkCustomer {
     private String id;
-    @JsonProperty("Identifiers")
-    private ArrayList<CustomerIdentifier> identifiers;
+
+    @JsonProperty("Accounts")
+    private ArrayList<BaseAccountDetails> baseAccountDetails;
 }

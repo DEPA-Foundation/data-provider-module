@@ -1,15 +1,15 @@
-package org.indiastack.depa.provider.gateway.models.account.http;
+package org.indiastack.depa.provider.models.account.http;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.indiastack.depa.provider.gateway.models.account.Account;
+import org.indiastack.depa.provider.models.account.Account;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class DiscoveredAccount {
+public class BaseAccountDetails {
     @JsonProperty("FIType")
     private String fiType;
 
@@ -22,7 +22,7 @@ public class DiscoveredAccount {
     @JsonProperty("maskedAccNumber")
     private String maskedAccountNumber;
 
-    public DiscoveredAccount(Account account) {
+    public BaseAccountDetails(Account account) {
         this.fiType = account.getType();
 
         this.accountRefNumber = account.getAccountRefNumber();

@@ -1,6 +1,6 @@
-package org.indiastack.depa.provider.gateway.dao;
+package org.indiastack.depa.provider.dao;
 
-import org.indiastack.depa.provider.gateway.models.account.Account;
+import org.indiastack.depa.provider.models.account.Account;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

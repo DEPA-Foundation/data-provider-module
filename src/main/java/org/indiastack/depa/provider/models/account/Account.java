@@ -1,11 +1,11 @@
-package org.indiastack.depa.provider.gateway.models.account;
+package org.indiastack.depa.provider.models.account;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.indiastack.depa.provider.gateway.models.account.http.DiscoverRequest;
+import org.indiastack.depa.provider.models.account.http.DiscoverRequest;
+import org.indiastack.depa.provider.models.account.http.LinkRequest;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 /*
@@ -54,7 +54,7 @@ public class Account {
     public Account(DiscoverRequest discoverRequest, String fiType) {
         this.status = AccountStatus.INITIATED;
         this.aaId = "DEFAULT_AA";
-        this.customerAAId = discoverRequest.getCustomer().getId();
+        this.customerAAId = discoverRequest.getDiscoverCustomer().getId();
 
         try {
             this.type = AccountType.valueOf(fiType);
@@ -62,6 +62,7 @@ public class Account {
             System.out.println("Unsupported fiType");
         }
     }
+
 
     public String getType() {
         if (this.type == null) {
