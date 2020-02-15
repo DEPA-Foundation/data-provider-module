@@ -35,8 +35,6 @@ public class Consent {
     private Date dataStartTimestamp;
     private Date dataEndTimestamp;
 
-    private Date createdAt;
-    private Date updatedAt;
 
     public Consent(Integer accountId,
                    String fetchType,

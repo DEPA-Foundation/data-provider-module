@@ -2,9 +2,10 @@ package org.indiastack.depa.provider.gateway.models.account;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.indiastack.depa.provider.gateway.models.account.http.DiscoverRequest;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /*
@@ -32,11 +33,14 @@ public class Account {
     // @todo: which accountRefNumber is this?
     private String accountRefNumber;
     private AccountStatus status;
-    private AccountType type;
-    private Date createdAt;
-    private Date updatedAt;
+    private ArrayList<AccountType> type;
 
-    public Account(String linkRefNumber, String aaId, String customerAAId, String accountNumber, String accountRefNumber, AccountType type) {
+    public Account(String linkRefNumber,
+                   String aaId,
+                   String customerAAId,
+                   String accountNumber,
+                   String accountRefNumber,
+                   ArrayList<AccountType> type) {
         this.linkRefNumber = linkRefNumber;
         this.aaId = aaId;
         this.customerAAId = customerAAId;
@@ -45,5 +49,32 @@ public class Account {
         this.type = type;
 
         this.status = AccountStatus.INITIATED;
+    }
+
+    /*
+     * @todo: handle NPE
+     */
+    public Account(DiscoverRequest discoverRequest) {
+        this.type = new ArrayList<>();
+
+        this.status = AccountStatus.INITIATED;
+        this.aaId = "DEFAULT_AA";
+        this.customerAAId = discoverRequest.getCustomer().getId();
+
+        for (String fiType : discoverRequest.getFiTypes()) {
+            try {
+                this.type.add(AccountType.valueOf(fiType));
+            } catch (NullPointerException npe) {
+                System.out.println("NPE found " + fiType);
+            }
+        }
+    }
+
+    public String getTypeToString() {
+        try {
+            return this.type.get(0).toString();
+        } catch (NullPointerException npe) {
+            return null;
+        }
     }
 }
