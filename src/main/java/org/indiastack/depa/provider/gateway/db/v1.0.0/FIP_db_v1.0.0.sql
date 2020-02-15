@@ -1,38 +1,67 @@
-CREATE TABLE `accounts` (
-  `id` int PRIMARY KEY,
-  `linkRefNumber` varchar(255),
-  `cust_aa_id` varchar(255),
-  `account_number` varchar(255),
-  `account_ref_number` varchar(255),
-  `account_type` ENUM ('SAVINGS', 'CHECKING'),
-  `status` ENUM ('DISCOVERED', 'DELINKED', 'LINKED'),
-  `timestamp` timestamp
+CREATE TYPE "link_status" AS ENUM (
+  'DISCOVERED',
+  'DELINKED',
+  'LINKED'
 );
 
-CREATE TABLE `consents` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `cust_aa_id` varchar(255),
-  `account_id` int,
-  `last_access_timestamp` timestamp,
-  `start_timestamp` timestamp,
-  `end_timestamp` timestamp,
-  `status` ENUM ('CREATED', 'REVOKED', 'PAUSED', 'RESUMED', 'EXPIRED'),
-  `fetch_type` ENUM ('ONE_TIME', 'RECURRING'),
-  `types` varchar(255),
-  `fi_types` varchar(255),
-  `data_start_timestamp` timestamp,
-  `data_end_timestamp` timestamp,
-  `mode` ENUM ('VIEW', 'EDIT'),
-  `frequency` int,
-  `data_filter_type` varchar(255),
-  `data_filter_operator` varchar(255),
-  `data_filter_value` float
+CREATE TYPE "account_type" AS ENUM (
+  'SAVINGS',
+  'CHECKING'
 );
 
-ALTER TABLE `consents` ADD FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`);
+CREATE TYPE "consent_status" AS ENUM (
+  'CREATED',
+  'REVOKED',
+  'PAUSED',
+  'RESUMED',
+  'EXPIRED'
+);
 
-CREATE UNIQUE INDEX `accounts_index_0` ON `accounts` (`linkRefNumber`);
+CREATE TYPE "fetch_type" AS ENUM (
+  'ONE_TIME',
+  'RECURRING'
+);
 
-CREATE INDEX `accounts_cust_aa_id_account_number_idx` ON `accounts` (`cust_aa_id`, `account_number`);
+CREATE TYPE "mode" AS ENUM (
+  'VIEW',
+  'EDIT'
+);
 
-CREATE INDEX `consents_account_id_idx` ON `consents` (`account_id`);
+CREATE TABLE "accounts" (
+  "id" int PRIMARY KEY,
+  "aa_id" varchar,
+  "link_ref_number" varchar,
+  "customer_aa_id" varchar,
+  "account_number" varchar,
+  "account_ref_number" varchar,
+  "account_type" account_type,
+  "status" link_status,
+  "timestamp" timestamp
+);
+
+CREATE TABLE "consents" (
+  "id" SERIAL PRIMARY KEY,
+  "account_id" int,
+  "last_access_timestamp" timestamp,
+  "start_timestamp" timestamp,
+  "end_timestamp" timestamp,
+  "status" consent_status,
+  "fetch_type" fetch_type,
+  "types" varchar,
+  "fi_types" varchar,
+  "data_start_timestamp" timestamp,
+  "data_end_timestamp" timestamp,
+  "mode" mode,
+  "frequency" int,
+  "data_filter_type" varchar,
+  "data_filter_operator" varchar,
+  "data_filter_value" float
+);
+
+ALTER TABLE "consents" ADD FOREIGN KEY ("account_id") REFERENCES "accounts" ("id");
+
+CREATE UNIQUE INDEX "accounts_link_ref_number_idx" ON "accounts" ("link_ref_number");
+
+CREATE INDEX "accounts_cust_aa_id_account_number_idx" ON "accounts" ("customer_aa_id", "account_number");
+
+CREATE INDEX "consents_account_id_idx" ON "consents" ("account_id");
