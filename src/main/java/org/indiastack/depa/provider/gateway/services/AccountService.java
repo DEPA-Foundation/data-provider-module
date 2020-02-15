@@ -7,6 +7,8 @@ import org.indiastack.depa.provider.gateway.models.account.http.DiscoverResponse
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class AccountService {
     private AccountDao accountDao;
@@ -26,8 +28,22 @@ public class AccountService {
 
     public DiscoverResponse discoverAccount(DiscoverRequest discoverRequest) {
         // Requests is of multiple fiTypes but response is of an array of accounts
-        Account account = new Account(discoverRequest);
-        accountDao.save(account);
-        return new DiscoverResponse(discoverRequest, account);
+        ArrayList<Account> accounts = getAccountsFromDiscoverRequest(discoverRequest);
+
+        // @todo: Fetch account details from the bank backend
+
+        accountDao.bulkSave(accounts);
+
+        return new DiscoverResponse(discoverRequest, accounts);
+    }
+
+    private ArrayList<Account> getAccountsFromDiscoverRequest(DiscoverRequest discoverRequest) {
+        ArrayList<Account> accounts = new ArrayList<>();
+
+        for (String fiType : discoverRequest.getFiTypes()) {
+            accounts.add(new Account(discoverRequest, fiType));
+        }
+
+        return accounts;
     }
 }

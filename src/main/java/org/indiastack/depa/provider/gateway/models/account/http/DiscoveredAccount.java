@@ -23,7 +23,7 @@ public class DiscoveredAccount {
     private String maskedAccountNumber;
 
     public DiscoveredAccount(Account account) {
-        this.fiType = account.getTypeToString();
+        this.fiType = account.getType();
 
         this.accountRefNumber = account.getAccountRefNumber();
         this.maskedAccountNumber = account.getAccountNumber();

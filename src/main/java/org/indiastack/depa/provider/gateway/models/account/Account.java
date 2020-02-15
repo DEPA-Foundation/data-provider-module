@@ -33,14 +33,14 @@ public class Account {
     // @todo: which accountRefNumber is this?
     private String accountRefNumber;
     private AccountStatus status;
-    private ArrayList<AccountType> type;
+    private AccountType type;
 
     public Account(String linkRefNumber,
                    String aaId,
                    String customerAAId,
                    String accountNumber,
                    String accountRefNumber,
-                   ArrayList<AccountType> type) {
+                   AccountType type) {
         this.linkRefNumber = linkRefNumber;
         this.aaId = aaId;
         this.customerAAId = customerAAId;
@@ -51,30 +51,23 @@ public class Account {
         this.status = AccountStatus.INITIATED;
     }
 
-    /*
-     * @todo: handle NPE
-     */
-    public Account(DiscoverRequest discoverRequest) {
-        this.type = new ArrayList<>();
-
+    public Account(DiscoverRequest discoverRequest, String fiType) {
         this.status = AccountStatus.INITIATED;
         this.aaId = "DEFAULT_AA";
         this.customerAAId = discoverRequest.getCustomer().getId();
 
-        for (String fiType : discoverRequest.getFiTypes()) {
-            try {
-                this.type.add(AccountType.valueOf(fiType));
-            } catch (NullPointerException npe) {
-                System.out.println("NPE found " + fiType);
-            }
+        try {
+            this.type = AccountType.valueOf(fiType);
+        } catch (IllegalArgumentException iae) {
+            System.out.println("Unsupported fiType");
         }
     }
 
-    public String getTypeToString() {
-        try {
-            return this.type.get(0).toString();
-        } catch (NullPointerException npe) {
-            return null;
+    public String getType() {
+        if (this.type == null) {
+            return "";
+        } else {
+            return this.type.toString();
         }
     }
 }

@@ -25,9 +25,12 @@ public class DiscoverResponse {
         this.discoveredAccounts = new ArrayList<>();
     }
 
-    public DiscoverResponse(DiscoverRequest discoverRequest, Account account) {
+    public DiscoverResponse(DiscoverRequest discoverRequest, ArrayList<Account> accounts) {
         this.discoveredAccounts = new ArrayList<>();
-        this.discoveredAccounts.add(new DiscoveredAccount(account));
+
+        for (Account account : accounts) {
+            this.discoveredAccounts.add(new DiscoveredAccount(account));
+        }
 
         this.version = discoverRequest.getVersion();
         this.transactionId = discoverRequest.getTransactionId();
