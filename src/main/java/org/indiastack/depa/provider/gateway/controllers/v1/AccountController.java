@@ -1,6 +1,8 @@
 package org.indiastack.depa.provider.gateway.controllers.v1;
 
 import org.indiastack.depa.provider.gateway.models.account.Account;
+import org.indiastack.depa.provider.gateway.models.account.http.DiscoverRequest;
+import org.indiastack.depa.provider.gateway.models.account.http.DiscoverResponse;
 import org.indiastack.depa.provider.gateway.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +28,8 @@ public class AccountController {
         return accountService.getAccount(accountId);
     }
 
-    @PostMapping("")
-    public Account createAccount(@RequestBody Account account) {
-        return accountService.createAccount(account);
+    @PostMapping("/discover")
+    public DiscoverResponse discoverAccounts(@RequestBody DiscoverRequest discoverRequest) {
+        return accountService.discoverAccount(discoverRequest);
     }
-
 }
