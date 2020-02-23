@@ -35,12 +35,13 @@ public class AccountController {
     }
 
     @DeleteMapping("/link")
-    public void deleteAccountLink() {
-
+    public String deleteAccountLink() {
+        return "NOT_IMPLEMENTED";
     }
 
     @GetMapping("/link/{RefNumber}/{Token}")
-    public void getLinkedAccount() {
+    public String getLinkedAccount(@PathVariable String refNumber, @PathVariable String token) {
+        return "NOT_IMPLEMENTED";
 
     }
 }
