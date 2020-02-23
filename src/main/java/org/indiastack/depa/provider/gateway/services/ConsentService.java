@@ -6,10 +6,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConsentService {
 
-    public Consent getConsent(String consentId) {
-        return new Consent();
-    }
-
     public Consent createConsent(Consent consent) {
         return new Consent();
     }

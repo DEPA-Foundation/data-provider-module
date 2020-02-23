@@ -1,6 +1,9 @@
 package org.indiastack.depa.provider.gateway.controllers.v1;
 
-import org.indiastack.depa.provider.gateway.models.account.Account;
+import org.indiastack.depa.provider.gateway.models.account.http.DiscoverRequest;
+import org.indiastack.depa.provider.gateway.models.account.http.DiscoverResponse;
+import org.indiastack.depa.provider.gateway.models.account.http.LinkRequest;
+import org.indiastack.depa.provider.gateway.models.account.http.LinkResponse;
 import org.indiastack.depa.provider.gateway.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-@RequestMapping("v1/gateway/accounts")
+@RequestMapping("Accounts")
 public class AccountController {
     private AccountService accountService;
 
@@ -21,14 +24,24 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/{accountId}")
-    public Account getAccount(@PathVariable("accountId") String accountId) {
-        return accountService.getAccount(accountId);
+    @PostMapping("/discover")
+    public DiscoverResponse discoverAccounts(@RequestBody DiscoverRequest discoverRequest) {
+        return accountService.discoverAccount(discoverRequest);
     }
 
-    @PostMapping("")
-    public Account createAccount(@RequestBody Account account) {
-        return accountService.createAccount(account);
+    @PostMapping("/link")
+    public LinkResponse linkAccount(@RequestBody LinkRequest linkRequest) {
+        return accountService.linkAccount(linkRequest);
     }
 
+    @DeleteMapping("/link")
+    public String deleteAccountLink() {
+        return "NOT_IMPLEMENTED";
+    }
+
+    @GetMapping("/link/{RefNumber}/{Token}")
+    public String getLinkedAccount(@PathVariable String refNumber, @PathVariable String token) {
+        return "NOT_IMPLEMENTED";
+
+    }
 }

@@ -6,18 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("v1/gateway/consents")
+@RequestMapping("Consent")
 public class ConsentController {
     private ConsentService consentService;
 
     @Autowired
     public ConsentController(ConsentService consentService) {
         this.consentService = consentService;
-    }
-
-    @GetMapping("/{consentId}")
-    public Consent getConsent(@PathVariable("consentId") String consentId) {
-        return consentService.getConsent(consentId);
     }
 
     @PostMapping("")

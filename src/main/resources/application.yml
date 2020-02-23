@@ -1,3 +1,8 @@
 springdoc:
   api-docs:
     path: gateway/api-docs
+
+spring.datasource:
+  url: jdbc:postgresql://localhost:5432/depa
+  username: depa
+  password: depa

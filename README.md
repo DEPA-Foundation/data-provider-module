@@ -51,5 +51,11 @@ The documentation of the project is available at http://{{host}}/gateway/api-doc
 `api-docs` will return a OpenAPI 3.0 compliant JSON scheme. 
 If required, you can import this JSON in Postman to visualise the API contracts 
 
+## Migrations
+The project leverages flyway for migrations. To run the migrations, create the SQL migration file under 
+`src/main/resources/db/migrations` and then run `gradle flywayMigrate -Dflyway.configFiles=src/main/resources/db/flyway.conf`
+
+For ORM, the project uses JooQ. To generate database tables, run `gradle generatePrimaryJooqSchemaSource --rerun-tasks` 
+
 ## Dependencies
 - Lombok
