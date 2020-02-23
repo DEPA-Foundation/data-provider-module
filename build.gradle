@@ -58,7 +58,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springdoc:springdoc-openapi-core:1.1.49'
 	implementation 'org.postgresql:postgresql'
-	implementation 'org.jooq:jooq'
+	implementation 'org.springframework.boot:spring-boot-starter-jooq'
 
 	compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
